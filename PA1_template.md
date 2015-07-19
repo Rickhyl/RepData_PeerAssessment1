@@ -1,7 +1,7 @@
 Reproducible Research: Peer Assessment 1
-by Fabian Linzberger
-github repo with RMarkdown source code: https://github.com/lefant/RepData_PeerAssessment1
-online rendered version on github pages: http://lefant.net/RepData_PeerAssessment1/PA1_template.html
+by Ricardo Lanza
+github repo with RMarkdown source code: https://github.com/Rickhyl/RepData_PeerAssessment1
+
 
 ## Loading and preprocessing the data
 ```{r}
@@ -30,6 +30,7 @@ attach(AvgStepbyInterval)
 plot(AvgStepbyInterval,type="l")
 subset(AvgStepbyInterval,AvgSteps==max(AvgStepbyInterval$AvgSteps))
 ```
+![](files/Rplot2.png)
 ## Imputing missing values
 ```{r}
 Count_NA_values<-sum(is.na(activity))
@@ -38,7 +39,10 @@ Activity_WO_NAvalues<-activity
 Activity_WO_NAvalues[is.na(Activity_WO_NAvalues)]<-Mean_step_byday
 Summary_by_day<-aggregate(Activity_WO_NAvalues$steps, by= list(Activity_WO_NAvalues$date), FUN=sum)
 names(Summary_by_day)<-c("Date","Total_steps")
-hist(Summary_by_day$Total_steps, main="Total_Steps")
+hist(Summary_by_day$Total_steps, main="Total_Steps")^
+```
+![](files/Rplot3.png)
+```{r}
 Summary_by_day_mean<-aggregate(Activity_WO_NAvalues$steps, by= list(Activity_WO_NAvalues$date), FUN=mean)
 Summary_by_day_median<-aggregate(Activity_WO_NAvalues$steps, by= list(Activity_WO_NAvalues$date), FUN=median)
 ```
@@ -53,3 +57,4 @@ library("lattice")
 AvgStepbyInterval_2<-aggregate(steps~interval+weekday,Activity_WO_NAvalues,mean)
 xyplot(AvgStepbyInterval_2$steps~AvgStepbyInterval_2$interval|AvgStepbyInterval_2$weekday,main="Average Steps per Day by Interval",xlab="Interval", ylab="Steps",layout=c(1,2),type="l")
 ```
+![](files/Rplot4.png)
