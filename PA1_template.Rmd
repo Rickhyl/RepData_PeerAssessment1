@@ -7,8 +7,12 @@ output:
 
 
 ## Loading and preprocessing the data
+#load the file
+activity <- read.csv("~/Week 3/repdata-data-activity/activity.csv")
+attach(activity)
+#Ignore NA values
+Activity<-activity[complete.cases(activity),]
 
-test
 
 ## What is mean total number of steps taken per day?
 
